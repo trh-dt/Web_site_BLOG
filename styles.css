@@ -300,14 +300,67 @@ body {
     }
 
     .site-title {
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 
     .site-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
     }
 
     .header-description {
+        font-size: 1.1rem;
+    }
+
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .nav-links a {
+        font-size: 1rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .portfolio-item-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .portfolio-item-content p {
+        font-size: 1rem;
+    }
+
+    .blog-post-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .blog-post-content p {
+        font-size: 1rem;
+    }
+
+    .blog-post-meta {
+        font-size: 0.9rem;
+    }
+
+    .about-text {
+        font-size: 1.1rem;
+    }
+
+    .experience-card h4 {
+        font-size: 1.3rem;
+    }
+
+    .experience-card li {
+        font-size: 1rem;
+    }
+
+    .skill-category h5 {
+        font-size: 1.2rem;
+    }
+
+    .skill-category ul {
         font-size: 1rem;
     }
 }
@@ -594,7 +647,7 @@ body {
     }
 
     .blog-post img {
-        height: 100px;
+        height: 250px;
     }
 
     .blog-post-content {
@@ -744,6 +797,10 @@ body {
     .nav-links a::before {
         font-size: 1rem;
     }
+
+    .blog-post img {
+        height: 220px;
+    }
 }
 
 /* Секция "Портфолио" */
@@ -835,8 +892,14 @@ body {
 
 .blog-post img {
     width: 100%;
-    height: 200px;
+    height: 300px;
     object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.blog-post:hover img {
+    transform: scale(1.05);
 }
 
 .blog-post-content {
@@ -959,6 +1022,10 @@ footer {
     .hero h2 {
         font-size: 2rem;
     }
+
+    .blog-post img {
+        height: 250px;
+    }
 }
 
 /* Featured section */
@@ -1029,6 +1096,100 @@ footer {
     .featured-grid,
     .posts-grid {
         grid-template-columns: 1fr;
+    }
+
+    .latest-posts .blog-post img {
+        height: 240px;
+    }
+}
+
+@media (max-width: 480px) {
+    .latest-posts .blog-post img {
+        height: 200px;
+    }
+}
+
+/* Стили для модального окна */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+
+.modal-content {
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(46, 204, 113, 0.2);
+    border-radius: 15px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+    transform: translateY(0);
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    color: #2ecc71;
+    transform: rotate(90deg);
+}
+
+.modal-title {
+    color: #ffffff;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.modal-body {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+    }
+
+    .modal-body {
+        font-size: 1rem;
     }
 }
 

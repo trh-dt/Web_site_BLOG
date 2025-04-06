@@ -1,46 +1,40 @@
 // Portfolio data
 const portfolioItems = [
     {
-        title: "Project 1",
-        description: "A modern web application built with React and Node.js",
-        image: "img/project1.jpg",
-        link: "#"
+        title: "HTR Shop",
+        description: "Modern online store. Where clothes and accessories are sold",
+        image: "img/1.png",
+        link: "https://trh-dt.github.io/Oscuro_Tienda/index.html"
     },
     {
-        title: "Project 2",
-        description: "E-commerce platform with advanced filtering and search",
-        image: "img/project2.jpg",
-        link: "#"
-    },
-    {
-        title: "Project 3",
-        description: "Portfolio website with glassmorphism design",
-        image: "img/project3.jpg",
-        link: "#"
+        title: "Didgital Portfolio",
+        description: "My personal portfolio website",
+        image: "img/2.png",
+        link: "https://trh-dt.github.io/PortFolio_DT/"
     }
 ];
 
 // Blog posts data
 const blogPosts = [
     {
-        title: "My First Article",
-        excerpt: "Introduction to my journey in web development",
-        image: "img/blog1.jpg",
-        date: "March 15, 2024",
+        title: "Chill Vibes",
+        excerpt: "My first article about my journey in web development",
+        image: "img/camphoto_126398554.jpg",
+        date: "April 5, 2025",
         link: "#"
     },
     {
-        title: "Web Design Trends",
-        excerpt: "Exploring the latest trends in web design for 2024",
-        image: "img/blog2.jpg",
-        date: "March 10, 2024",
+        title: "Munich Trip",
+        excerpt: "My first article about my journey in web development",
+        image: "img/IMG_5830.jpeg",
+        date: "February 25, 2025",
         link: "#"
     },
     {
-        title: "JavaScript Tips",
-        excerpt: "Essential tips for writing clean and efficient JavaScript code",
-        image: "img/blog3.jpg",
-        date: "March 5, 2024",
+        title: "Upwork",
+        excerpt: "My first article about my journey in web development",
+        image: "img/Screenshot 2025-04-06 at 19.24.56.png",
+        date: "April 6, 2025",
         link: "#"
     }
 ];
@@ -74,17 +68,33 @@ function createBlogPosts() {
         const blogPost = document.createElement('div');
         blogPost.className = 'blog-post';
         blogPost.innerHTML = `
-            <img src="${post.image}" alt="${post.title}">
+            <img data-src="${post.image}" alt="${post.title}" loading="lazy">
             <div class="blog-post-content">
                 <h3>${post.title}</h3>
                 <p>${post.excerpt}</p>
                 <div class="blog-post-meta">
                     <span>${post.date}</span>
-                    <a href="${post.link}" class="read-more">Read More</a>
+                    <a href="#" class="read-more">Read More</a>
                 </div>
             </div>
         `;
         blogGrid.appendChild(blogPost);
+    });
+
+    // Добавляем обработчики для кнопок Read More
+    const readMoreButtons = blogGrid.querySelectorAll('.read-more');
+    readMoreButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const post = this.closest('.blog-post');
+            const title = post.querySelector('h3').textContent;
+            const content = `
+                <p>${post.querySelector('p').textContent}</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            `;
+            openModal(title, content);
+        });
     });
 }
 
@@ -117,17 +127,33 @@ function createLatestPosts() {
         const latestPost = document.createElement('div');
         latestPost.className = 'blog-post';
         latestPost.innerHTML = `
-            <img src="${post.image}" alt="${post.title}">
+            <img data-src="${post.image}" alt="${post.title}" loading="lazy">
             <div class="blog-post-content">
                 <h3>${post.title}</h3>
                 <p>${post.excerpt}</p>
                 <div class="blog-post-meta">
                     <span>${post.date}</span>
-                    <a href="${post.link}" class="read-more">Read More</a>
+                    <a href="#" class="read-more">Read More</a>
                 </div>
             </div>
         `;
         postsGrid.appendChild(latestPost);
+    });
+
+    // Добавляем обработчики для кнопок Read More
+    const readMoreButtons = postsGrid.querySelectorAll('.read-more');
+    readMoreButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const post = this.closest('.blog-post');
+            const title = post.querySelector('h3').textContent;
+            const content = `
+                <p>${post.querySelector('p').textContent}</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            `;
+            openModal(title, content);
+        });
     });
 }
 
@@ -149,6 +175,71 @@ function initMobileMenu() {
     });
 }
 
+// Функция для открытия модального окна
+function openModal(title, content) {
+    const modal = document.getElementById('blogModal');
+    const modalTitle = modal.querySelector('.modal-title');
+    const modalBody = modal.querySelector('.modal-body');
+    
+    modalTitle.textContent = title;
+    modalBody.innerHTML = content;
+    modal.classList.add('active');
+    
+    // Блокируем прокрутку страницы
+    document.body.style.overflow = 'hidden';
+}
+
+// Функция для закрытия модального окна
+function closeModal() {
+    const modal = document.getElementById('blogModal');
+    modal.classList.remove('active');
+    // Разблокируем прокрутку страницы
+    document.body.style.overflow = '';
+}
+
+// Инициализация модального окна
+function initModal() {
+    const modal = document.getElementById('blogModal');
+    if (!modal) return;
+
+    const closeBtn = modal.querySelector('.close-modal');
+    
+    // Закрытие по клику на крестик
+    closeBtn.addEventListener('click', closeModal);
+    
+    // Закрытие по клику вне модального окна
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Закрытие по нажатию клавиши Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+}
+
+// Функция для ленивой загрузки изображений
+function lazyLoadImages() {
+    const images = document.querySelectorAll('img[data-src]');
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                observer.unobserve(img);
+            }
+        });
+    });
+
+    images.forEach(img => imageObserver.observe(img));
+}
+
 // Initialize all components
 document.addEventListener('DOMContentLoaded', () => {
     createPortfolioItems();
@@ -156,6 +247,8 @@ document.addEventListener('DOMContentLoaded', () => {
     createFeaturedProjects();
     createLatestPosts();
     initMobileMenu();
+    initModal();
+    lazyLoadImages(); // Добавляем инициализацию ленивой загрузки
 });
 
 // Массив для хранения постов
